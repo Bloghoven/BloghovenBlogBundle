@@ -20,5 +20,7 @@
         "autoload": {
             "psr-0": { "Bloghoven\\Bundle\\BlogBundle": "" }
         }
-    }
+    },
+
+    "target-dir": "Bloghoven/Bundle/BlogBundle"
 }
