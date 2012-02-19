@@ -17,9 +17,7 @@
         "pagerfanta/pagerfanta": "master-dev"
     },
     "autoload": {
-        "autoload": {
-            "psr-0": { "Bloghoven\\Bundle\\BlogBundle": "" }
-        }
+        "psr-0": { "Bloghoven\\Bundle\\BlogBundle": "" }
     },
 
     "target-dir": "Bloghoven/Bundle/BlogBundle"
