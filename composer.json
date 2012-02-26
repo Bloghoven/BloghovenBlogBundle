@@ -13,8 +13,8 @@
     "require": {
         "php": ">=5.3.2",
         "symfony/symfony": ">=2.0.0",
-        "bloghoven/abstract-theme-bundle": "master-dev",
-        "pagerfanta/pagerfanta": "master-dev"
+        "bloghoven/abstract-theme-bundle": "dev-master",
+        "pagerfanta/pagerfanta": "dev-master"
     },
     "autoload": {
         "psr-0": { "Bloghoven\\Bundle\\BlogBundle": "" }
