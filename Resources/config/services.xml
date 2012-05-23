@@ -6,6 +6,12 @@
 
     <services>
       <service id="bloghoven.settings" class="Symfony\Component\HttpFoundation\ParameterBag" />
+
+      <service id="bloghoven.twig_extension" class="Bloghoven\Bundle\BlogBundle\Twig\BloghovenExtension" public="false">
+        <argument type="service" id="bloghoven.settings" />
+
+        <tag name="twig.extension" />
+      </service>
     </services>
 
 </container>
