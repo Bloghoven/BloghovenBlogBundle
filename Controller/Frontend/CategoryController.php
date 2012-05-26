@@ -4,6 +4,9 @@ namespace Bloghoven\Bundle\BlogBundle\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+use Bloghoven\Bundle\BlogBundle\ContentProvider\Interfaces\CachableContentProviderInterface;
 
 /**
 * 
@@ -19,9 +22,23 @@ class CategoryController extends Controller
 
   public function entriesAction(Request $request, $permalink_id)
   {
-    $category = $this->get('bloghoven.content_provider')->getCategoryWithPermalinkId($permalink_id);
+    $provider = $this->get('bloghoven.content_provider');
 
-    $pagerfanta = $this->get('bloghoven.content_provider')->getEntriesPagerForCategory($category);
+    $response = new Response();
+
+    if ($provider instanceOf CachableContentProviderInterface)
+    {
+      $response->setPublic();
+      $response->setLastModified($provider->getLastModificationTime());
+
+      if ($response->isNotModified($request)) {
+        return $response;
+      }
+    }
+
+    $category = $provider->getCategoryWithPermalinkId($permalink_id);
+
+    $pagerfanta = $provider->getEntriesPagerForCategory($category);
 
     $pagerfanta->setMaxPerPage($this->get('bloghoven.settings')->get('per_page'));
     $pagerfanta->setCurrentPage($request->query->get('page', 1));

@@ -34,5 +34,6 @@ class BloghovenBlogExtension extends Extension
     $def->addMethodCall('set', array('name', $config['name']));
     $def->addMethodCall('set', array('tagline', $config['tagline']));
     $def->addMethodCall('set', array('per_page', $config['per_page']));
+    $def->addMethodCall('set', array('rss_ttl', $config['rss_ttl']));
   }
 }

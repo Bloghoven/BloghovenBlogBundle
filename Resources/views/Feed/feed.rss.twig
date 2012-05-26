@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+    <title>{{bloghoven_setting('name')}}</title>
+    <description>{{bloghoven_setting('tagline')}}</description>
+    <link>{{path('Bloghoven_index')}}</link>
+    <lastBuildDate>{{ "now"|date("D, d M Y H:i:s T") }}</lastBuildDate>
+    {% if pager.nbResults > 0 %}
+    <pubDate>{{pager.currentPageResults.0.postedAt|date("D, d M Y H:i:s T")}}</pubDate>
+    {% endif %}
+    <ttl>{{bloghoven_setting('rss_ttl')}}</ttl>
+
+    {% for entry in pager.currentPageResults %}
+    <item>
+        <title>{{entry.title}}</title>
+        <description>{{entry.excerpt|markdown|e}}</description>
+        <link>{{path('Bloghoven_permalink', {'permalink_id': entry.permalinkId})}}</link>
+        <guid>{{entry.permalinkId}}</guid>
+        <pubDate>{{entry.postedAt|date("D, d M Y H:i:s T")}}</pubDate>
+    </item>
+    {% endfor %}
+</channel>
+</rss>
