@@ -5,6 +5,7 @@ namespace Bloghoven\Bundle\BlogBundle\Controller\Frontend;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Bloghoven\Bundle\BlogBundle\ContentProvider\Interfaces\CachableContentProviderInterface;
 
@@ -40,6 +41,18 @@ class HomeController extends Controller
     }
     else
     {
+      switch ($_format)
+      {
+        case 'rss':
+          $response->headers->set('Content-Type', 'application/rss+xml');
+          break;
+        case 'atom':
+          $response->headers->set('Content-Type', 'application/atom+xml');
+          break;
+        default:
+          throw new NotFoundHttpException();
+      }
+
       return $this->render("BloghovenBlogBundle:Feed:feed.$_format.twig", array('pager' => $pagerfanta), $response);
     }
   }

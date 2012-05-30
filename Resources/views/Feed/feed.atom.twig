@@ -4,8 +4,9 @@
 
     <title>{{bloghoven_setting('name')}}</title>
     <subtitle>{{bloghoven_setting('tagline')}}</subtitle>
-    <link href="{{path('Bloghoven_index_feed', {'_format': 'atom'})}}" rel="self" />
-    <link href="{{path('Bloghoven_index')}}" />
+    <id>{{url('Bloghoven_index_feed', {'_format': 'atom'})}}</id>
+    <link href="{{url('Bloghoven_index_feed', {'_format': 'atom'})}}" rel="self" />
+    <link href="{{url('Bloghoven_index')}}" />
     {% if pager.nbResults > 0 %}
     <updated>{{pager.currentPageResults.0.postedAt|date("c")}}</updated>
     {% endif %}
@@ -13,10 +14,10 @@
     {% for entry in pager.currentPageResults %}
     <entry>
         <title>{{entry.title}}</title>
-        <link type="text/html" href="{{path('Bloghoven_permalink', {'permalink_id': entry.permalinkId})}}" />
-        <id>{{entry.permalinkId}}</id>
+        <link type="text/html" href="{{url('Bloghoven_permalink', {'permalink_id': entry.permalinkId})}}" />
+        <id>{{url('Bloghoven_permalink', {'permalink_id': entry.permalinkId})}}</id>
         <updated>{{entry.postedAt|date("c")}}</updated>
-        <summary type="text/html">{{entry.excerpt|markdown}}</summary>
+        <summary type="html">{{entry.excerpt|markdown|e}}</summary>
     </entry>
     {% endfor %}
 

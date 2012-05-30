@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
     <title>{{bloghoven_setting('name')}}</title>
     <description>{{bloghoven_setting('tagline')}}</description>
-    <link>{{path('Bloghoven_index')}}</link>
-    <lastBuildDate>{{ "now"|date("D, d M Y H:i:s T") }}</lastBuildDate>
+    <link>{{url('Bloghoven_index')}}</link>
+    <lastBuildDate>{{ "now"|date(constant('DateTime::RSS')) }}</lastBuildDate>
     {% if pager.nbResults > 0 %}
-    <pubDate>{{pager.currentPageResults.0.postedAt|date("D, d M Y H:i:s T")}}</pubDate>
+    <pubDate>{{pager.currentPageResults.0.postedAt|date(constant('DateTime::RSS'))}}</pubDate>
     {% endif %}
     <ttl>{{bloghoven_setting('rss_ttl')}}</ttl>
+
+    <atom:link href="{{url('Bloghoven_index_feed', {'_format': 'rss'})}}" rel="self" type="application/rss+xml" />
 
     {% for entry in pager.currentPageResults %}
     <item>
         <title>{{entry.title}}</title>
         <description>{{entry.excerpt|markdown|e}}</description>
-        <link>{{path('Bloghoven_permalink', {'permalink_id': entry.permalinkId})}}</link>
-        <guid>{{entry.permalinkId}}</guid>
-        <pubDate>{{entry.postedAt|date("D, d M Y H:i:s T")}}</pubDate>
+        <link>{{url('Bloghoven_permalink', {'permalink_id': entry.permalinkId})}}</link>
+        <guid>{{url('Bloghoven_permalink', {'permalink_id': entry.permalinkId})}}</guid>
+        <pubDate>{{entry.postedAt|date(constant('DateTime::RSS'))}}</pubDate>
     </item>
     {% endfor %}
 </channel>
