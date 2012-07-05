@@ -15,7 +15,7 @@
     {% for entry in pager.currentPageResults %}
     <item>
         <title>{{entry.title}}</title>
-        <description>{{entry.excerpt|markdown|e}}</description>
+        <description><![CDATA[{{entry.excerpt|markdown}}]]></description>
         <link>{{url('Bloghoven_permalink', {'permalink_id': entry.permalinkId})}}</link>
         <guid>{{url('Bloghoven_permalink', {'permalink_id': entry.permalinkId})}}</guid>
         <pubDate>{{entry.postedAt|date(constant('DateTime::RSS'))}}</pubDate>
