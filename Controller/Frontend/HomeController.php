@@ -44,10 +44,10 @@ class HomeController extends Controller
       switch ($_format)
       {
         case 'rss':
-          $response->headers->set('Content-Type', 'application/rss+xml');
+          $response->headers->set('Content-Type', 'application/rss+xml;charset=utf-8');
           break;
         case 'atom':
-          $response->headers->set('Content-Type', 'application/atom+xml');
+          $response->headers->set('Content-Type', 'application/atom+xml;charset=utf-8');
           break;
         default:
           throw new NotFoundHttpException();
