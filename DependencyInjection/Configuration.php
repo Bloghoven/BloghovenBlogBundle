@@ -27,6 +27,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('name')->defaultValue('Your blog')->end()
                 ->scalarNode('tagline')->defaultValue('Just another Bloghoven blog')->end()
                 ->scalarNode('rss_ttl')->defaultValue('1800')->end()
+                ->scalarNode('cache_service')->defaultValue(null)->end()
             ->end()
         ;
 

@@ -27,6 +27,11 @@ class BloghovenBlogExtension extends Extension
     $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
     $loader->load('services.xml');
 
+    if ($config['cache_service'])
+    {
+      $container->setAlias('bloghoven.cache', $config['cache_service']);
+    }
+
     $container->setParameter('bloghoven.content_provider.id', $config['provider']);
 
     $def = $container->getDefinition('bloghoven.settings');

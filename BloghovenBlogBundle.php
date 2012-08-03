@@ -5,7 +5,7 @@ namespace Bloghoven\Bundle\BlogBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-use Bloghoven\Bundle\BlogBundle\DependencyInjection\Compiler\TaggedProviderPass;
+use Bloghoven\Bundle\BlogBundle\DependencyInjection\Compiler;
 
 class BloghovenBlogBundle extends Bundle
 {
@@ -13,6 +13,7 @@ class BloghovenBlogBundle extends Bundle
   {
     parent::build($container);
 
-    $container->addCompilerPass(new TaggedProviderPass());
+    $container->addCompilerPass(new Compiler\TaggedProviderPass());
+    $container->addCompilerPass(new Compiler\TaggedEntryContentProcessorPass());
   }
 }

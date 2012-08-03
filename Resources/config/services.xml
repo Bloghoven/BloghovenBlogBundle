@@ -9,9 +9,27 @@
 
       <service id="bloghoven.twig_extension" class="Bloghoven\Bundle\BlogBundle\Twig\BloghovenExtension" public="false">
         <argument type="service" id="bloghoven.settings" />
+        <argument type="service" id="bloghoven.entry_content_processor_manager" />
 
         <tag name="twig.extension" />
       </service>
+
+      <service id="bloghoven.entry_content_processor_manager" class="Bloghoven\Bundle\BlogBundle\EntryContentProcessor\EntryContentProcessorManager">
+        <call method="setStopwatch">
+          <argument type="service" id="debug.stopwatch" on-invalid="ignore" />
+        </call>
+      </service>
+
+      <service id="bloghoven.entry_content_processor.markdown" class="Bloghoven\Bundle\BlogBundle\EntryContentProcessor\MarkdownProcessor">
+        <argument type="service" id="markdown.parser" on-invalid="ignore" />
+
+        <call method="setCache">
+          <argument type="service" id="bloghoven.cache" on-invalid="ignore" />
+        </call>
+
+        <tag name="bloghoven.entry_content_processor" format="html" priority="0" />
+      </service>
+
     </services>
 
 </container>
