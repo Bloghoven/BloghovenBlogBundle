@@ -2,20 +2,16 @@
 
 namespace Bloghoven\Bundle\BlogBundle\EntryContentProcessor;
 
-use Symfony\Component\HttpKernel\Debug\Stopwatch;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
 * @author Magnus Nordlander
 */
 class EntryContentProcessorManager
 {
-  protected $processors = array();
-  protected $stopwatch = null;
+  use \Bloghoven\Bundle\BlogBundle\Tools\StopwatchableTrait;
 
-  public function setStopwatch(Stopwatch $stopwatch)
-  {
-    $this->stopwatch = $stopwatch;
-  }
+  protected $processors = array();
 
   public function addProcessor(EntryContentProcessorInterface $processor, $format_group = 'html', $priority = 0)
   {
@@ -67,13 +63,5 @@ class EntryContentProcessorManager
     });
 
     return $content;
-  }
-
-  protected function usingStopwatch($callable)
-  {
-    if ($this->stopwatch)
-    {
-      $callable($this->stopwatch);
-    }
   }
 }
